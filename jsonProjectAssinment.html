@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+       #baap
+        {
+             width: 1350px;
+             height: 100%;
+             background-image: linear-gradient(to right,rgb(17, 44, 34),#365fac,rgb(6, 12, 49));
+             display: flex;
+             /* flex-direction: column; */
+             flex-wrap: wrap;
+             /* padding-left: 50px;
+             padding-right: 50px; */
+             box-sizing: border-box;
+             padding-left: 150px;
+             color: white;
+             font-size: 17px;
+             font-family: Arial;
+             
+        }
+        td{
+          padding: 10px;
+
+        }
+        #baap div
+        {
+            
+            width:calc(1000px/2) ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid white;
+            margin-top: 10px;
+        }
+        .flag
+        {
+            padding-bottom: 10px; 
+            transition: 0.6s;
+        }
+        .flag img:hover{
+          box-shadow: 3px 3px 2px #00ca65 , -3px -3px 2px #00ca65;
+          border-radius: 20px;
+        }
+        .info
+        {
+          text-shadow: 2px 2px 3px #3700ff;
+        }
+    </style>
+
+</head>
+<body>
+        <h1 style="text-align: center;background-color: #c2ccdb;color: rgb(38, 63, 133); padding: 10px;">Countries With Flag</h1>
+        <div id="baap">
+
+        </div>
+
+
+    <script>
+           fetch("https://restcountries.com/v3.1/all").then((response)=>
+           {
+              return response.json()
+           }).then((data)=>{
+            // console.log(data)
+
+           let table=""
+
+           data.map((values)=>
+           {
+            
+               console.log(values.name.common)
+
+               table+=`<div class="flag"><img src="${values.flags.png}"></div>  <div class="info"><table>
+              <tr>
+                <td>Country Name</td>
+                <td>:</td>
+                <td>${values.name.common}</td>
+              </tr>
+              <tr>
+                <td>Capital</td>
+                <td>:</td>
+                <td>${values.capital}</td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <td>:</td>
+                <td>${values.status}</td>
+              </tr>
+           </table></div>`;
+           })
+
+           document.getElementById("baap").innerHTML=table;
+           })
+    </script>
+</body>
+</html>
